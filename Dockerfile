@@ -11,21 +11,18 @@ RUN set -x \
 
 RUN mkdir /tmp/build
 WORKDIR /tmp/build
-RUN git clone https://github.com/VIPSTARCOIN/VIPSTARCOIN-bitcore --recursive
-WORKDIR /tmp/build/VIPSTARCOIN-bitcore
+RUN git clone https://github.com/fkfk/VIPSTARCOIN --recursive
+WORKDIR /tmp/build/VIPSTARCOIN
 RUN git submodule update --init --recursive
 
 # Note autogen will prompt to install some more dependencies if needed
-RUN set -x \
- && chmod 755 ./autogen.sh \
- && sync \
- && ./autogen.sh
+RUN ./autogen.sh
 RUN ./configure --with-pic --disable-shared --enable-cxx --disable-bench --disable-tests -without-gui
 RUN make
 
-COPY --from=build /tmp/build/VIPSTARCOIN-bitcore/src/VIPSTARCOINd /bin/VIPSTARCOINd
-COPY --from=build /tmp/build/VIPSTARCOIN-bitcore/src/VIPSTARCOIN-tx /bin/VIPSTARCOIN-tx
-COPY --from=build /tmp/build/VIPSTARCOIN-bitcore/src/VIPSTARCOIN-cli /bin/VIPSTARCOIN-cli
+COPY --from=build /tmp/build/VIPSTARCOIN/src/VIPSTARCOINd /bin/VIPSTARCOINd
+COPY --from=build /tmp/build/VIPSTARCOIN/src/VIPSTARCOIN-tx /bin/VIPSTARCOIN-tx
+COPY --from=build /tmp/build/VIPSTARCOIN/src/VIPSTARCOIN-cli /bin/VIPSTARCOIN-cli
 
 LABEL version="1.0.0-beta"
 
