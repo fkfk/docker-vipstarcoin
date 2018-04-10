@@ -12,7 +12,7 @@ RUN apt-get -y install libdb4.8-dev libdb4.8++-dev
 # enable zeromq
 RUN apt-get -y install libzmq3-dev
 
-RUN git clone -b "master-bitcore" https://github.com/fkfk/VIPSTARCOIN --recursive
+RUN git clone https://github.com/VIPSTARCOIN/VIPSTARCOIN-bitcore --recursive
 WORKDIR VIPSTARCOIN
 RUN git submodule update --init --recursive
 
