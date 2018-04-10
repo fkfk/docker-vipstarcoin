@@ -13,7 +13,7 @@ RUN apt-get -y install libdb4.8-dev libdb4.8++-dev
 RUN apt-get -y install libzmq3-dev
 
 RUN git clone https://github.com/VIPSTARCOIN/VIPSTARCOIN-bitcore --recursive
-WORKDIR VIPSTARCOIN
+WORKDIR VIPSTARCOIN-bitcore
 RUN git submodule update --init --recursive
 
 # Note autogen will prompt to install some more dependencies if needed
@@ -21,9 +21,9 @@ RUN ./autogen.sh
 RUN ./configure --with-pic --disable-shared --enable-cxx --disable-bench --disable-tests
 RUN make -j2
 
-COPY --from=build /VIPSTARCOIN/src/VIPSTARCOINd /bin/VIPSTARCOINd
-COPY --from=build /VIPSTARCOIN/src/VIPSTARCOIN-tx /bin/VIPSTARCOIN-tx
-COPY --from=build /VIPSTARCOIN/src/VIPSTARCOIN-cli /bin/VIPSTARCOIN-cli
+COPY --from=build /VIPSTARCOIN-bitcore/src/VIPSTARCOINd /bin/VIPSTARCOINd
+COPY --from=build /VIPSTARCOIN-bitcore/src/VIPSTARCOIN-tx /bin/VIPSTARCOIN-tx
+COPY --from=build /VIPSTARCOIN-bitcore/src/VIPSTARCOIN-cli /bin/VIPSTARCOIN-cli
 
 LABEL version="1.0.0-beta"
 
