@@ -1,6 +1,6 @@
 FROM ubuntu:xenial as build
 
-# Build htmlcoin
+# Build VIPSTARCOIN
 
 RUN apt-get -y update
 RUN apt-get -y install build-essential libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils git cmake libboost-all-dev
