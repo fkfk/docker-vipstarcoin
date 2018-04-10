@@ -3,14 +3,10 @@ FROM ubuntu:xenial as build
 # Build VIPSTARCOIN
 
 RUN apt-get -y update
-RUN apt-get -y install build-essential libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils git cmake libboost-all-dev
-RUN apt-get -y install software-properties-common
+RUN apt-get -y install build-essential libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils git cmake libboost-all-dev libzmq3-dev install software-properties-common
 RUN add-apt-repository ppa:bitcoin/bitcoin
 RUN apt-get -y update
 RUN apt-get -y install libdb4.8-dev libdb4.8++-dev
-
-# enable zeromq
-RUN apt-get -y install libzmq3-dev
 
 RUN git clone https://github.com/VIPSTARCOIN/VIPSTARCOIN-bitcore --recursive
 WORKDIR VIPSTARCOIN-bitcore
