@@ -4,9 +4,9 @@ FROM ubuntu:xenial as build
 
 RUN set -x \
  && apt-get -y update \
- && apt-get -y install build-essential libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils git cmake libboost-all-dev libzmq3-dev software-properties-common
- && add-apt-repository ppa:bitcoin/bitcoin
- && apt-get -y update
+ && apt-get -y install build-essential libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils git cmake libboost-all-dev libzmq3-dev software-properties-common \
+ && add-apt-repository ppa:bitcoin/bitcoin \
+ && apt-get -y update \
  && apt-get -y install libdb4.8-dev libdb4.8++-dev
 
 RUN mkdir /tmp/build
