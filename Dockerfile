@@ -11,7 +11,7 @@ RUN set -x \
 
 RUN mkdir /tmp/build
 WORKDIR /tmp/build
-RUN git clone https://github.com/fkfk/VIPSTARCOIN --recursive
+RUN git clone -b "master-bitcore" https://github.com/fkfk/VIPSTARCOIN --recursive
 WORKDIR /tmp/build/VIPSTARCOIN
 RUN git submodule update --init --recursive
 
