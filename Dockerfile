@@ -2,11 +2,12 @@ FROM ubuntu:xenial as build
 
 # Build VIPSTARCOIN
 
-RUN apt-get -y update
-RUN apt-get -y install build-essential libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils git cmake libboost-all-dev libzmq3-dev software-properties-common
-RUN add-apt-repository ppa:bitcoin/bitcoin
-RUN apt-get -y update
-RUN apt-get -y install libdb4.8-dev libdb4.8++-dev
+RUN set -x \
+ && apt-get -y update \
+ && apt-get -y install build-essential libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils git cmake libboost-all-dev libzmq3-dev software-properties-common
+ && add-apt-repository ppa:bitcoin/bitcoin
+ && apt-get -y update
+ && apt-get -y install libdb4.8-dev libdb4.8++-dev
 
 RUN mkdir /tmp/build
 WORKDIR /tmp/build
@@ -15,7 +16,9 @@ WORKDIR /tmp/build/VIPSTARCOIN-bitcore
 RUN git submodule update --init --recursive
 
 # Note autogen will prompt to install some more dependencies if needed
-RUN chmod 755 /tmp/build/VIPSTARCOIN-bitcore/autogen.sh && /tmp/build/VIPSTARCOIN-bitcore/autogen.sh
+RUN set -x \
+ && chmod 755 ./autogen.sh \
+ && ./VIPSTARCOIN-bitcore/autogen.sh
 RUN ./configure --with-pic --disable-shared --enable-cxx --disable-bench --disable-tests -without-gui
 RUN make
 
