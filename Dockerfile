@@ -19,7 +19,7 @@ RUN git submodule update --init --recursive
 # Note autogen will prompt to install some more dependencies if needed
 RUN chmod 755 ./autogen.sh && ./autogen.sh
 RUN ./configure --with-pic --disable-shared --enable-cxx --disable-bench --disable-tests -without-gui
-RUN make -j2
+RUN make
 
 COPY --from=build /VIPSTARCOIN-bitcore/src/VIPSTARCOINd /bin/VIPSTARCOINd
 COPY --from=build /VIPSTARCOIN-bitcore/src/VIPSTARCOIN-tx /bin/VIPSTARCOIN-tx
